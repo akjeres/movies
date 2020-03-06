@@ -1,4 +1,5 @@
 import React from "react";
+import ButtonMovieWillWatch from './ButtonMovieWillWatch';
 
 export default class MovieItem extends React.Component {
     render() {
@@ -10,8 +11,9 @@ export default class MovieItem extends React.Component {
                 poster_path,
                 vote_average,
             },
-            removeMovie: remove,
+            removeMovie: deleteMovie,
             addMovie: add,
+            updateMovie,
         } = this.props;
         return(
             <div className="card">
@@ -24,17 +26,14 @@ export default class MovieItem extends React.Component {
                 <h6 className="card-title">{title}</h6>
                 <div className="d-flex justify-content-between align-items-center">
                   <p className="mb-0">Rating: {vote_average}</p>
-                  <button type="button" className="btn btn-secondary" onClick={ add.bind(null, this.props.movie) }>
-                    Will Watch
-                  </button>
+                  <ButtonMovieWillWatch
+                      add={ add.bind(null, this.props.movie) }
+                      remove={ updateMovie.bind(null, this.props.movie) }
+                  />
                 </div>
-                <button type="button" onClick={ remove.bind(null, id) }>Delete movie</button>
+                <button type="button" onClick={ deleteMovie.bind(null, id) }>Delete movie</button>
               </div>
             </div>
-            // <div>
-            //     <p>{ title }</p>
-            //     <button type="button" onClick={ handler.bind(null, id) }>Delete movie</button>
-            // </div>
         );
     };
 };
